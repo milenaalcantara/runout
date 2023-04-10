@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F30A00DD29E443AC009DDB2E /* RunoutTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = F30A00DC29E443AC009DDB2E /* RunoutTileSet.sks */; };
+		F30A00DF29E4449F009DDB2E /* MyScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F30A00DE29E4449F009DDB2E /* MyScene.sks */; };
 		F35DC2FF29DAFE2B005A7CE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35DC2FE29DAFE2B005A7CE0 /* AppDelegate.swift */; };
 		F35DC30529DAFE2B005A7CE0 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35DC30429DAFE2B005A7CE0 /* GameScene.swift */; };
 		F35DC30729DAFE2B005A7CE0 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35DC30629DAFE2B005A7CE0 /* GameViewController.swift */; };
@@ -47,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F30A00DC29E443AC009DDB2E /* RunoutTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RunoutTileSet.sks; sourceTree = "<group>"; };
+		F30A00DE29E4449F009DDB2E /* MyScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyScene.sks; sourceTree = "<group>"; };
 		F35DC2FB29DAFE2B005A7CE0 /* Runout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F35DC2FE29DAFE2B005A7CE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F35DC30429DAFE2B005A7CE0 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				F35DC33829DB0CF5005A7CE0 /* LevelOne.sks */,
+				F30A00DE29E4449F009DDB2E /* MyScene.sks */,
 			);
 			path = Levels;
 			sourceTree = "<group>";
@@ -205,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				F35DC33B29DB0E3A005A7CE0 /* TileSets.sks */,
+				F30A00DC29E443AC009DDB2E /* RunoutTileSet.sks */,
 			);
 			path = Tiles;
 			sourceTree = "<group>";
@@ -355,6 +361,8 @@
 				F35DC33C29DB0E3A005A7CE0 /* TileSets.sks in Resources */,
 				F35DC30C29DAFE2C005A7CE0 /* Assets.xcassets in Resources */,
 				F35DC30F29DAFE2C005A7CE0 /* LaunchScreen.storyboard in Resources */,
+				F30A00DF29E4449F009DDB2E /* MyScene.sks in Resources */,
+				F30A00DD29E443AC009DDB2E /* RunoutTileSet.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

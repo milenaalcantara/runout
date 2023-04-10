@@ -15,7 +15,7 @@ enum GameState {
 class GameScene: SKScene {
     
     var worldLayer: Layer = Layer()
-    var backgroundLayer: RepeatingLayer = RepeatingLayer()
+//    var backgroundLayer: RepeatingLayer = RepeatingLayer()
     var player: Player = Player(
         imageNamed: GameConstants.StringConstants.playerImageName
     )
@@ -96,7 +96,7 @@ class GameScene: SKScene {
 
         if gameState == .ongoing {
             worldLayer.update(dt)
-            backgroundLayer.update(dt)
+//            backgroundLayer.update(dt)
         }
     }
     
@@ -117,27 +117,27 @@ private extension GameScene {
         worldLayer.zPosition = GameConstants.ZPositions.worldZ
         worldLayer.layerVelocity = CGPoint(x: -200.0, y: 0.0)
         
-        addChild(backgroundLayer)
-        backgroundLayer.zPosition = GameConstants.ZPositions.farBGZ
+//        addChild(backgroundLayer)
+//        backgroundLayer.zPosition = GameConstants.ZPositions.farBGZ
+//        
+//        for i in 0...1 {
+//            let backgroundImage = SKSpriteNode(
+//                imageNamed: GameConstants.StringConstants.worldBackgroundNames[0]
+//            )
+//            backgroundImage.name = String(i)
+//            backgroundImage.scale(to: frame.size, width: false, multiplier: 1.0)
+//            backgroundImage.anchorPoint = CGPoint.zero
+//            backgroundImage.position = CGPoint(
+//                x: 0.0 + CGFloat(i) * backgroundImage.size.width,
+//                y: 0.0
+//            )
+//            backgroundLayer.addChild(backgroundImage)
+//        }
+//
+//        backgroundLayer.layerVelocity = CGPoint(
+//            x: -100.0, y: 0.0)
         
-        for i in 0...1 {
-            let backgroundImage = SKSpriteNode(
-                imageNamed: GameConstants.StringConstants.worldBackgroundNames[0]
-            )
-            backgroundImage.name = String(i)
-            backgroundImage.scale(to: frame.size, width: false, multiplier: 1.0)
-            backgroundImage.anchorPoint = CGPoint.zero
-            backgroundImage.position = CGPoint(
-                x: 0.0 + CGFloat(i) * backgroundImage.size.width,
-                y: 0.0
-            )
-            backgroundLayer.addChild(backgroundImage)
-        }
-        
-        backgroundLayer.layerVelocity = CGPoint(
-            x: -100.0, y: 0.0)
-        
-        load(level: "LevelOne")
+        load(level: "MyScene")
     }
     
     func load(level: String) {
