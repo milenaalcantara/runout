@@ -17,8 +17,10 @@ class GameScene: SKScene {
     var worldLayer: Layer = Layer()
 //    var backgroundLayer: RepeatingLayer = RepeatingLayer()
     var player: Player = Player(
-        imageNamed: GameConstants.StringConstants.playerImageName
-    )
+        imageNamed: GameConstants.StringConstants.playerImageName)
+    
+    let soundPlayer = SoundPlayer()
+    
     
     var mapNode: SKNode = SKNode()
     var tileMap: SKTileMapNode = SKTileMapNode()
@@ -43,6 +45,8 @@ class GameScene: SKScene {
     
     var touch = false
     var brake = false
+    
+
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -204,6 +208,7 @@ private extension GameScene {
     }
     
     func jump() {
+        run(soundPlayer.jumpSound)
         player.airbone = true
         player.turnGravity(on: false)
         player.run(player.userData?.value(forKey: GameConstants.StringConstants.jumpUpActionKey) as! SKAction) {

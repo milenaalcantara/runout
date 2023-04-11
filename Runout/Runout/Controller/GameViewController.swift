@@ -7,7 +7,9 @@
 
 import UIKit
 import SpriteKit
-import GameplayKit
+import AVFoundation
+
+var backgroundMusicPlayer: AVAudioPlayer!
 
 class GameViewController: UIViewController {
 
@@ -20,11 +22,20 @@ class GameViewController: UIViewController {
             scene.scaleMode = .aspectFill
             
             view.presentScene(scene)
+            startBackgroundMusic()
             view.ignoresSiblingOrder = true
             
 //            view.showsFPS = true
 //            view.showsNodeCount = true
 //            view.showsPhysics = true
+        }
+        
+        func startBackgroundMusic() {
+            let path = Bundle.main.path(forResource: "backgroundSound", ofType: "wav")
+            let url = URL(fileURLWithPath: path!)
+            backgroundMusicPlayer = try! AVAudioPlayer(contentsOf: url)
+            backgroundMusicPlayer.numberOfLoops = -1
+            backgroundMusicPlayer.play()
         }
     }
 
