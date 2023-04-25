@@ -15,7 +15,7 @@ enum GameState {
 class GameScene: SKScene {
     
     var worldLayer: Layer = Layer()
-//    var backgroundLayer: RepeatingLayer = RepeatingLayer()
+    var backgroundLayer: RepeatingLayer = RepeatingLayer()
     var player: Player = Player(
         imageNamed: GameConstants.StringConstants.playerImageName
     )
@@ -43,6 +43,8 @@ class GameScene: SKScene {
     
     var touch = false
     var brake = false
+    
+    var coins = 0
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -96,7 +98,7 @@ class GameScene: SKScene {
 
         if gameState == .ongoing {
             worldLayer.update(dt)
-//            backgroundLayer.update(dt)
+            backgroundLayer.update(dt)
         }
     }
     
@@ -112,33 +114,39 @@ class GameScene: SKScene {
 }
 
 private extension GameScene {
+    // MARK: Layers
+    ///background configurations
+    
     func createLayers() {
         addChild(worldLayer)
         worldLayer.zPosition = GameConstants.ZPositions.worldZ
         worldLayer.layerVelocity = CGPoint(x: -200.0, y: 0.0)
         
-//        addChild(backgroundLayer)
-//        backgroundLayer.zPosition = GameConstants.ZPositions.farBGZ
-//        
-//        for i in 0...1 {
-//            let backgroundImage = SKSpriteNode(
-//                imageNamed: GameConstants.StringConstants.worldBackgroundNames[0]
-//            )
-//            backgroundImage.name = String(i)
-//            backgroundImage.scale(to: frame.size, width: false, multiplier: 1.0)
-//            backgroundImage.anchorPoint = CGPoint.zero
-//            backgroundImage.position = CGPoint(
-//                x: 0.0 + CGFloat(i) * backgroundImage.size.width,
-//                y: 0.0
-//            )
-//            backgroundLayer.addChild(backgroundImage)
-//        }
-//
-//        backgroundLayer.layerVelocity = CGPoint(
-//            x: -100.0, y: 0.0)
+        addChild(backgroundLayer)
+        backgroundLayer.zPosition = GameConstants.ZPositions.farBGZ
+
+        for i in 0...1 {
+            let backgroundImage = SKSpriteNode(
+                imageNamed: GameConstants.StringConstants.worldBackgroundNames[1]
+            )
+            backgroundImage.name = String(i)
+            backgroundImage.scale(to: frame.size, width: false, multiplier: 1.0)
+            backgroundImage.anchorPoint = CGPoint.zero
+            backgroundImage.position = CGPoint(
+                x: 0.0 + CGFloat(i) * backgroundImage.size.width,
+                y: 0.0
+            )
+            backgroundLayer.addChild(backgroundImage)
+        }
+
+        backgroundLayer.layerVelocity = CGPoint(
+            x: -100.0, y: 0.0)
         
-        load(level: "MyScene")
+//        load(level: "MyScene")
+        load(level: "LevelOne")
     }
+    
+    // MARK: Load Scene
     
     func load(level: String) {
         if let levelNode = SKNode.unarchiveFromFile(level) {
@@ -168,14 +176,16 @@ private extension GameScene {
         addPlayer()
     }
     
+    // MARK: Player
+    
     func addPlayer() {
-        player.scale(to: frame.size, width: false, multiplier: 0.1) // seta o tamanho do personagem
+        player.scale(to: frame.size, width: false, multiplier: 0.2) // seta o tamanho do personagem
         player.name = GameConstants.StringConstants.playerName
         PhysicsHelper.addPhysicsBody(to: player, with: player.name!) // configuração da física do personagem
         
         player.position = CGPoint(
-            x: frame.midX / 6.0,
-            y: frame.midY
+            x: frame.midX * 0.4,
+            y: frame.midY * 1.5
         ) // posição inicial do personagem
         player.zPosition = GameConstants.ZPositions.playerZ
         player.loadTextures() // carrega as texturas para animação do personagem
@@ -183,6 +193,8 @@ private extension GameScene {
         addChild(player)
         addPlayerAction()
     }
+    
+    // MARK: Player Actions
     
     func addPlayerAction() {
         let upAction = SKAction.moveBy(
@@ -232,6 +244,30 @@ private extension GameScene {
         }
     }
     
+    func handleCollectible(sprite: SKSpriteNode) {
+        switch sprite.name {
+            case GameConstants.StringConstants.coinName:
+                collectCoin(sprite: sprite)
+            default:
+                break
+        }
+    }
+    
+    func collectCoin(sprite: SKSpriteNode) {
+        coins += 1
+        if let coinDust = ParticleHelper.addParticleEffect(
+            name: GameConstants.StringConstants.coinDustEmitterKey,
+            particlepPositionRange: CGVector(dx: 5.0, dy: 5.0),
+            position: CGPoint.zero) {
+            sprite.addChild(coinDust)
+            sprite.run(SKAction.fadeOut(withDuration: 0.4), completion: {
+                coinDust.removeFromParent()
+                sprite.removeFromParent()
+                
+            })
+        }
+    }
+    
     func die(reason: Int) {
         gameState = .finished // fim do jogo
         player.turnGravity(on: false) // affect by gravity
@@ -266,6 +302,8 @@ private extension GameScene {
     }
 }
 
+// MARK: Physics Delegate
+
 extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let contactMask = contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask
@@ -281,6 +319,9 @@ extension GameScene: SKPhysicsContactDelegate {
             case GameConstants.PhysicsCategories.playerCategory | GameConstants.PhysicsCategories.frameCategory:
                 physicsBody = nil
                 die(reason: 1)
+            case GameConstants.PhysicsCategories.playerCategory | GameConstants.PhysicsCategories.collectibleCategory:
+                let collectible = contact.bodyA.node?.name == player.name ? contact.bodyB.node as! SKSpriteNode : contact.bodyB.node as! SKSpriteNode
+                handleCollectible(sprite: collectible)
             default:
                 break
         }

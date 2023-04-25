@@ -29,6 +29,10 @@
 		F35DC34E29DBA460005A7CE0 /* GroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35DC34D29DBA460005A7CE0 /* GroundNode.swift */; };
 		F35DC35029DBAAAD005A7CE0 /* AnimationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35DC34F29DBAAAD005A7CE0 /* AnimationHelper.swift */; };
 		F35DC35229DC6AAE005A7CE0 /* ObjectHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35DC35129DC6AAE005A7CE0 /* ObjectHelper.swift */; };
+		F3DCB09C29E6EFA1001B99A1 /* ParticleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3DCB09B29E6EFA1001B99A1 /* ParticleHelper.swift */; };
+		F3DCB0A029E6F1F2001B99A1 /* CoinDustEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = F3DCB09E29E6F1F2001B99A1 /* CoinDustEmitter.sks */; };
+		F3DCB0A429E6FA9C001B99A1 /* BrakeSparkEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = F3DCB0A229E6FA9C001B99A1 /* BrakeSparkEmitter.sks */; };
+		F3DCB0A529E6FA9C001B99A1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3DCB0A329E6FA9C001B99A1 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +78,10 @@
 		F35DC34D29DBA460005A7CE0 /* GroundNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroundNode.swift; sourceTree = "<group>"; };
 		F35DC34F29DBAAAD005A7CE0 /* AnimationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationHelper.swift; sourceTree = "<group>"; };
 		F35DC35129DC6AAE005A7CE0 /* ObjectHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectHelper.swift; sourceTree = "<group>"; };
+		F3DCB09B29E6EFA1001B99A1 /* ParticleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleHelper.swift; sourceTree = "<group>"; };
+		F3DCB09E29E6F1F2001B99A1 /* CoinDustEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CoinDustEmitter.sks; sourceTree = "<group>"; };
+		F3DCB0A229E6FA9C001B99A1 /* BrakeSparkEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BrakeSparkEmitter.sks; sourceTree = "<group>"; };
+		F3DCB0A329E6FA9C001B99A1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,10 +132,11 @@
 		F35DC2FD29DAFE2B005A7CE0 /* Runout */ = {
 			isa = PBXGroup;
 			children = (
+				F3DCB09D29E6F165001B99A1 /* ParticleEmitters */,
 				F35DC33229DB0ADD005A7CE0 /* application */,
 				F35DC34A29DB98A9005A7CE0 /* Helpers */,
 				F35DC33529DB0B5A005A7CE0 /* Resources */,
-				F35DC34729DB939E005A7CE0 /* Custom */,
+				F35DC34729DB939E005A7CE0 /* CustomClasses */,
 				F35DC34029DB6D42005A7CE0 /* Layers */,
 				F35DC33D29DB159F005A7CE0 /* Extensions */,
 				F35DC33429DB0AFD005A7CE0 /* Scenes */,
@@ -232,13 +241,13 @@
 			path = Layers;
 			sourceTree = "<group>";
 		};
-		F35DC34729DB939E005A7CE0 /* Custom */ = {
+		F35DC34729DB939E005A7CE0 /* CustomClasses */ = {
 			isa = PBXGroup;
 			children = (
 				F35DC34829DB93B3005A7CE0 /* Player.swift */,
 				F35DC34D29DBA460005A7CE0 /* GroundNode.swift */,
 			);
-			path = Custom;
+			path = CustomClasses;
 			sourceTree = "<group>";
 		};
 		F35DC34A29DB98A9005A7CE0 /* Helpers */ = {
@@ -248,8 +257,19 @@
 				F35DC34B29DB9AF3005A7CE0 /* PhysicsHelper.swift */,
 				F35DC34F29DBAAAD005A7CE0 /* AnimationHelper.swift */,
 				F35DC35129DC6AAE005A7CE0 /* ObjectHelper.swift */,
+				F3DCB09B29E6EFA1001B99A1 /* ParticleHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F3DCB09D29E6F165001B99A1 /* ParticleEmitters */ = {
+			isa = PBXGroup;
+			children = (
+				F3DCB09E29E6F1F2001B99A1 /* CoinDustEmitter.sks */,
+				F3DCB0A229E6FA9C001B99A1 /* BrakeSparkEmitter.sks */,
+				F3DCB0A329E6FA9C001B99A1 /* Assets.xcassets */,
+			);
+			path = ParticleEmitters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -360,8 +380,11 @@
 				F35DC33929DB0CF5005A7CE0 /* LevelOne.sks in Resources */,
 				F35DC33C29DB0E3A005A7CE0 /* TileSets.sks in Resources */,
 				F35DC30C29DAFE2C005A7CE0 /* Assets.xcassets in Resources */,
+				F3DCB0A529E6FA9C001B99A1 /* Assets.xcassets in Resources */,
 				F35DC30F29DAFE2C005A7CE0 /* LaunchScreen.storyboard in Resources */,
+				F3DCB0A029E6F1F2001B99A1 /* CoinDustEmitter.sks in Resources */,
 				F30A00DF29E4449F009DDB2E /* MyScene.sks in Resources */,
+				F3DCB0A429E6FA9C001B99A1 /* BrakeSparkEmitter.sks in Resources */,
 				F30A00DD29E443AC009DDB2E /* RunoutTileSet.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,6 +417,7 @@
 				F35DC35229DC6AAE005A7CE0 /* ObjectHelper.swift in Sources */,
 				F35DC34929DB93B3005A7CE0 /* Player.swift in Sources */,
 				F35DC34629DB803C005A7CE0 /* GameConstants.swift in Sources */,
+				F3DCB09C29E6EFA1001B99A1 /* ParticleHelper.swift in Sources */,
 				F35DC35029DBAAAD005A7CE0 /* AnimationHelper.swift in Sources */,
 				F35DC33F29DB15B5005A7CE0 /* SKNode+Ext.swift in Sources */,
 				F35DC34429DB77BC005A7CE0 /* RepeatingLayer.swift in Sources */,
